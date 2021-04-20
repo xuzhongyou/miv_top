@@ -22,7 +22,7 @@ Insert example:
 
 
 def db_connection(host='49.52.10.156',port=3306,user='xzy',
-                    passwd='xuzhongyou',db='miv_top',charset='utf8'):
+                    passwd='',db='miv_top',charset='utf8'):
     db = pymysql.connect(
          host=host,
          port=port,
