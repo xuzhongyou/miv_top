@@ -68,5 +68,3 @@ results = nvitop.nv_info()
 print(results)
 '''
 
-a = {'a':123,'b':4567}
-print(set(a.keys()))

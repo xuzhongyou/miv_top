@@ -15,11 +15,17 @@ def run():
 
             # 2）对于 start_processes 插入到数据库
 
-            # 3）同时将必要的信息输出到日志文件中
+            # 3）同时将必要的信息输出到日志文件中   
 
         # sleep 五分钟
         sleep(300)
         pre_processes = cur_processes
+
+def Timer_send():
+    #1) 查询数据库每人一周使用的总时长
     
+    #2) 定时发送邮件
+    schedule.every().wednesday.at("22:00").do(send_mail) 
 
 
+ 
