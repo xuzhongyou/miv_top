@@ -1,3 +1,4 @@
 pymysql-1.0.2
 nvidia-ml-py
 psutil
+pyyaml

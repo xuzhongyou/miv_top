@@ -1,0 +1,30 @@
+database:
+  host: 49.52.10.156
+  port: 3306
+  user: xzy 
+  passwd: 
+  db: miv_top
+  table: resource_tb
+server:
+  ip: 49.52.10.xx
+  member:
+    - xzy
+    - wjh
+    - wtt
+email:
+  title: GPU Situation
+  host_server: 'smtp.qq.com'
+  sender: 926214756@qq.com
+  author_code: lgkmzvgcovfgbfii
+  receiver:
+    - xzy: 936214756@qq.com
+    - wjh: 
+    - wtt: 
+    - zhk: 1140519779@qq.com
+    - jzw: 51205901097@stu.ecnu.edu.cn
+    - yqs: 1729609500@qq.com
+    - zyj: 627039309@qq.com
+    - hfy: 1027482997@qq.com
+    - lzy: 563909094@qq.com
+    - wx: 51205901084@stu.ecnu.edu.cn
+    - dqy: 649310204@qq.com
