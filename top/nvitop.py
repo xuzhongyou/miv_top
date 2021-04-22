@@ -22,6 +22,7 @@ def nv_info():
             cpu_percent =  pid.cpu_percent()
             mem_percent = pid.memory_percent()
             create_time = datetime.datetime.fromtimestamp(pid.create_time())
-            runtime = datetime.datetime.now() - create_time
-            info[pid_num] = (index,username,memory_use>>20,cpu_percent,mem_percent,create_time.strftime('%Y-%m-%d %H:%M:%S'),runtime.total_seconds()/60,cmd[:30])
+            cur_time = datetime.datetime.now()
+            runtime = cur_time - create_time
+            info[pid_num] = (index,username,memory_use>>20,cpu_percent,mem_percent,create_time.strftime('%Y-%m-%d %H:%M:%S'),cur_time.strftime('%Y-%m-%d %H:%M:%S'),runtime.total_seconds()/60,cmd[:30])
     return info

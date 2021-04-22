@@ -26,3 +26,5 @@ email:
     - lzy: 563909094@qq.com
     - wx: 51205901084@stu.ecnu.edu.cn
     - dqy: 649310204@qq.com
+log:
+  path: '../GPU_usage.log'

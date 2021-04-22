@@ -4,7 +4,8 @@ import psutil
 import datetime 
 import mail.email as email 
 import top.nvitop as nvitop 
-
+import utils.util as util
+import logging
 '''
 1.  测试nvml 篇
 nvml.nvmlInit()
@@ -68,3 +69,12 @@ results = nvitop.nv_info()
 print(results)
 '''
 
+'''
+6.  测试日志文件 
+util.init_logging('global',logging.INFO,'./test_env.log',0)
+logger = logging.getLogger('global')
+logger.info('test the log script!')
+'''
+a = 'sdfaf'\
+    '123'
+print(a)
