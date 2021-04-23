@@ -1,14 +1,17 @@
 import sys,os
 import curses
-from nvitop import get_info
+from .nvi import nv_info
 
 header = [
     '╒═════════════════════════════════════════════════════════════════════════════╕',
     '│ Processes:                                                                  │',
-    '│ GPU  PID  USER  GPU MEM  %CPU  %MEM      TIME  COMMAND                │',
+    '│ GPU  PID  USER   G_MEM  %CPU  %MEM     S_TIME   R_TIME      COMMAND         │',
     '╞═════════════════════════════════════════════════════════════════════════════╡',
 ]
-info = get_info()
+line1 = '├─────────────────────────────────────────────────────────────────────────────┤'
+line2 = '|_____________________________________________________________________________|' 
+line3 = '╞═════════════════════════════════════════════════════════════════════════════╡'
+info = nv_info()
 def draw_menu(stdscr):
     k = 0
     cursor_x = 0
@@ -49,7 +52,7 @@ def draw_menu(stdscr):
         cursor_y = min(height-1, cursor_y)
 
         # Declaration of strings
-        title = "Monitor Wang"[:width-1]
+        title = "GPU Resources Usage "[:width-1]
         subtitle = "Written by Xiaoke Hu"[:width-1]
         keystr = "Last key pressed: {}".format(k)[:width-1]
         statusbarstr = "Press 'q' to exit | STATUS BAR | Pos: {}, {}".format(cursor_x, cursor_y)
@@ -58,8 +61,8 @@ def draw_menu(stdscr):
 
         # Centering calculations
         start_x_title = int((width // 2) - (len(title) // 2) - len(title) % 2)
-        start_x_subtitle = int((width // 2) - (len(subtitle) // 2) - len(subtitle) % 2)
-        start_x_keystr = int((width // 2) - (len(keystr) // 2) - len(keystr) % 2)
+        # start_x_subtitle = int((width // 2) - (len(subtitle) // 2) - len(subtitle) % 2)
+        # start_x_keystr = int((width // 2) - (len(keystr) // 2) - len(keystr) % 2)
         start_x_content = int((width // 2)- (len(header[0])//2)-len(header[0])%2)
         # start_y = int((height // 2) - 2)
         start_y = 5
@@ -79,27 +82,31 @@ def draw_menu(stdscr):
 
         # Rendering title
         stdscr.addstr(start_y, start_x_title, title)
+        stdscr.addstr(int(0.8*height), int(0.8*width), subtitle)
 
         # Turning off attributes for title
         stdscr.attroff(curses.color_pair(2))
         stdscr.attroff(curses.A_BOLD)
 
         # Print rest of text
-        stdscr.addstr(start_y + 1, start_x_subtitle, subtitle)
-        stdscr.addstr(start_y + 3, (width // 2) - 2, '-' * 4)
+
+        dis_pos = 0
         for i,item in enumerate(header):
-            stdscr.addstr(10+i, start_x_content, item)
-        # add 
-        for i,item in enumerate(info):
-            # stdscr.addstr(15+i, start_x_content,
-            # '├─────────────────────────────────────────────────────────────────────────────┤')
-            stdscr.addstr(15+i, start_x_content+2,
-                str(item[0])+"  "+str(item[1])+"  "+str(item[2])+"  "+str(item[3])+"  "+str(item[4])+"  "+str(item[5]))
+            stdscr.addstr(int(0.3*height)+i, start_x_content, item)
+            dis_pos = int(0.3*height)+i
+        dis_pos +=1
+        for i,item in enumerate(info.keys()):
+            pid = item
+            item = info[item]
+            stdscr.addstr(dis_pos, start_x_content+2,
+                str(item[0])+"  "+str(pid)+"  "+str(item[1])+"  "+str(item[2])+"MiB  "+str(item[3])+"  "+str(format(item[4],'.2f'))+"  "+str(item[5])[:10] +"  "+ str(format(item[-2]/60,'.1f'))+"     "+ str(item[-1][:15]))
+            dis_pos +=1
+            stdscr.addstr(dis_pos, start_x_content,line3)
+            dis_pos +=1
         stdscr.move(cursor_y, cursor_x)
 
         # Refresh the screen
         stdscr.refresh()
-
         # Wait for next input
         k = stdscr.getch()
 
