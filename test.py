@@ -3,7 +3,7 @@ import pynvml as nvml
 import psutil
 import datetime 
 import mail.email as email 
-import top.nvitop as nvitop 
+import top.nvi as nvi
 import utils.util as util
 import logging
 '''
@@ -75,6 +75,5 @@ util.init_logging('global',logging.INFO,'./test_env.log',0)
 logger = logging.getLogger('global')
 logger.info('test the log script!')
 '''
-a = 'sdfaf'\
-    '123'
-print(a)
+results = nvi.nv_info()
+print(results)

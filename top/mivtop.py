@@ -61,10 +61,8 @@ def draw_menu(stdscr):
 
         # Centering calculations
         start_x_title = int((width // 2) - (len(title) // 2) - len(title) % 2)
-        # start_x_subtitle = int((width // 2) - (len(subtitle) // 2) - len(subtitle) % 2)
-        # start_x_keystr = int((width // 2) - (len(keystr) // 2) - len(keystr) % 2)
         start_x_content = int((width // 2)- (len(header[0])//2)-len(header[0])%2)
-        # start_y = int((height // 2) - 2)
+
         start_y = 5
         # Rendering some text
         whstr = "Width: {}, Height: {}".format(width, height)
@@ -73,8 +71,6 @@ def draw_menu(stdscr):
         # Render status bar
         stdscr.attron(curses.color_pair(3))
         stdscr.addstr(height-1, 0, statusbarstr)
-        # stdscr.addstr(height-1, len(statusbarstr), " " * (width - len(statusbarstr) - 1))
-        stdscr.attroff(curses.color_pair(3))
 
         # Turning on attributes for title
         stdscr.attron(curses.color_pair(2))
@@ -95,11 +91,9 @@ def draw_menu(stdscr):
             stdscr.addstr(int(0.3*height)+i, start_x_content, item)
             dis_pos = int(0.3*height)+i
         dis_pos +=1
-        for i,item in enumerate(info.keys()):
-            pid = item
-            item = info[item]
+        for i,item in enumerate(info):
             stdscr.addstr(dis_pos, start_x_content+2,
-                str(item[0])+"  "+str(pid)+"  "+str(item[1])+"  "+str(item[2])+"MiB  "+str(item[3])+"  "+str(format(item[4],'.2f'))+"  "+str(item[5])[:10] +"  "+ str(format(item[-2]/60,'.1f'))+"     "+ str(item[-1][:15]))
+                str(item[0])+"  "+str(item[2])+"  "+str(item[1])+"  "+str(item[3])+"MiB  "+str(item[4])+"  "+str(item[5])+"  "+str(item[6])[:10] +"  "+ str(item[-2])+"     "+ str(item[-1][:15]))
             dis_pos +=1
             stdscr.addstr(dis_pos, start_x_content,line3)
             dis_pos +=1
