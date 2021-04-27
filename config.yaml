@@ -16,6 +16,38 @@ email:
   host_server: 'smtp.qq.com'
   sender: 926214756@qq.com
   author_code: lgkmzvgcovfgbfii
+  table_header: 
+    - Name
+    - Server_name
+    - GPUs
+    - Time
+    - Running_time
+  html: """
+      <html>
+      <head>
+      <style> 
+        table, th, td {{ border: 1px solid black; border-collapse: collapse; }}
+        th, td {{ padding: 5px; }}
+      </style>
+      </head>
+      <body><p>Hello, Friend.</p>
+      <p>Here is your data:</p>
+      {}
+      <p>Regards,</p>
+      <p>Me</p>
+      </body></html>
+      """
+  text: """
+      Hello, Friend.
+
+      Here is your data:
+
+      {}
+
+      Regards,
+
+      Me"""
+
   receiver:
     - xzy: 936214756@qq.com
     - zhk: 1140519779@qq.com

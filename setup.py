@@ -16,7 +16,7 @@ setup(
         'nvidia-ml-py==11.*',
         'psutil',
         'pyyaml',
-        'pymysql'
-
+        'pymysql',
+        'tabulate'
     ])
 )

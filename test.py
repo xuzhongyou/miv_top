@@ -6,6 +6,7 @@ import mail.email as email
 import top.nvi as nvi
 import utils.util as util
 import logging
+from tabulate import tabulate
 '''
 1.  测试nvml 篇
 nvml.nvmlInit()
@@ -75,5 +76,51 @@ util.init_logging('global',logging.INFO,'./test_env.log',0)
 logger = logging.getLogger('global')
 logger.info('test the log script!')
 '''
-results = nvi.nv_info()
-print(results)
+
+'''
+7.  测试表格
+table_header = ['Name', 'Chinese', 'Math', 'English']
+table_data = [('Tom', '90', '80', '85'),('Jim', '70', '90', '80'),
+              ('Lucy', '90', '70', '90')]
+print(tabulate(table_data, headers=table_header, tablefmt='grid'))
+'''
+
+'''
+8.  测试表格和邮件
+
+table_header = ['Name','Server_name','GPUs','Time','Running_time']
+table_data = [('lpy','csffm3','4','2020.01.25','1000')]
+text = """
+Hello, Friend.
+Here is your data:
+{}
+Regards,
+Me"""
+
+html = """
+<html>
+<head>
+<style> 
+  table, th, td {{ border: 1px solid black; border-collapse: collapse; }}
+  th, td {{ padding: 5px; }}
+</style>
+</head>
+<body><p>Hello, Friend.</p>
+<p>Here is your data:</p>
+{}
+<p>Regards,</p>
+<p>Me</p>
+</body></html>
+"""
+
+sender = '936214756@qq.com'
+receiver = ['936214756@qq.com','542327823@qq.com']
+# receiver = ['936214756@qq.com']
+pwd = 'nwiciwqhsfssbddg'
+host_server = 'smtp.qq.com'
+mail_content = email.write_table(table_header,table_data,fmt)
+text = text.format(tabulate(table_data,table_header,'grid'))
+html = html.format(tabulate(table_data,table_header,'html'))
+email_title = 'GPU usage!'
+email.send_mail(text,html,email_title,sender,receiver,pwd,host_server)
+'''
